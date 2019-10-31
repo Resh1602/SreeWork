@@ -13,7 +13,7 @@
 	<input type="submit" value="Subtract" name="subtract">
 	<input type="submit" value="Multiply" name="multiply">
 	<input type="submit" value="Divide" name="divide"> <br><br>
-	<input type="text" name="t3" value="{t3}"> 
+	<input type="text" name="t3" value="request.getAttribute("name")"> 
 	</div>
 	</div>
 </form>
