@@ -14,28 +14,24 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HomePageController {
 	@RequestMapping(value = "/redirect", params = "save", method = RequestMethod.GET)
-	public ModelAndView save(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView save(HttpServletRequest request, HttpServletResponse response) throws MyException {
 		String i = (request.getParameter("t1"));
 		String outputString = null;
 		System.out.println("Value of i is" + i + "this");
 		ModelAndView mv = new ModelAndView();
-		if (i == null || i.isEmpty() || i == "") {
-			try {
-				throw new MyException();
-			} catch (MyException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}else {
-			UserDataModel userDataModel = new UserDataModel();
-			userDataModel.setTextFromUser(i);
-			UserDataManager manager = new UserDataManagerImpl();
-			boolean result = manager.saveUserDataToFile(userDataModel);
-			System.out.println("Result:" + result);
-			if (result == true) {
-				outputString = "File saved successfully";
-				System.out.println(outputString);
-			}
+		UserDataModel userDataModel = new UserDataModel();
+		userDataModel.setTextFromUser(i);
+		UserDataManager manager = new UserDataManagerImpl();
+		boolean result = false;
+		try {
+		result = manager.saveUserDataToFile(userDataModel);
+		}catch(MyException me){
+			outputString = "Error saving file";
+		}
+		System.out.println("Result:" + result);
+		if (result == true) {
+			outputString = "File saved successfully";
+			System.out.println(outputString);
 		}
 		mv.setViewName("index.jsp");
 		mv.addObject("result", outputString);

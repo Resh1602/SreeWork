@@ -9,8 +9,19 @@ import java.io.ObjectOutputStream;
 
 public class UserDataDaoImpl implements UserDataDao {
 
-	public boolean saveUserDataToFile(UserDataModel userDataModel){
-		if(userDataModel !=null){
+	public boolean saveUserDataToFile(UserDataModel userDataModel) throws MyException{
+		if(userDataModel.getTextFromUser() == null) {
+			//try {
+				throw new MyException();
+		}else if(userDataModel.getTextFromUser() == ""){
+			//try {
+				throw new MyException();
+		}
+		else if(userDataModel.getTextFromUser().equals(null)) {
+			//try {
+				throw new MyException();
+		}
+		else {
 			FileOutputStream fop;
 			try {
 				fop = new FileOutputStream("Document.ser");
@@ -24,9 +35,6 @@ public class UserDataDaoImpl implements UserDataDao {
 				e.printStackTrace();
 			}
 			return true;
-		}
-		else {
-			return false;
 		}		
 	}
 

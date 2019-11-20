@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class UserDataManagerImpl implements UserDataManager {
 
-	public boolean saveUserDataToFile(UserDataModel userDataModel) {
+	public boolean saveUserDataToFile(UserDataModel userDataModel) throws MyException {
 		boolean result = false;
 		if (userDataModel != null) {
 			System.out.println("Inside UserDataManager and value is " + userDataModel.getTextFromUser());
